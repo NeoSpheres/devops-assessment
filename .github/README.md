@@ -1,35 +1,35 @@
-# Cas Pratique DevOps
+# DevOps Practical Case
 
-## Pré-requis
+## Prerequisites
 
-- Read about Docker Multi-Stage build
-- AWS Account avec une instance EC2 gratuite
-- Grafana Cloud Account
-- Github Account
+- Read about Docker Multi-Stage builds  
+- AWS Account with a free EC2 instance  
+- Grafana Cloud Account  
+- GitHub Account  
 
-## Temps
+## Time Estimate
 
-- 1h à 2h 
+- 1 to 2 hours
 
-## Objectif
+## Objective
 
-Le but est de voir comment vous abordez un sujet technique, comprendre les problèmes que vous rencontrez et votre manière de les résoudre.
+The goal is to observe how you approach a technical task, understand the problems you encounter, and your method for solving them.
 
-Les pré-requis et les suggestions sont là pour vous faire gagner du temps, vous pouvez utiliser d'autres outils si vous êtes plus à l'aise avec.
+The prerequisites and suggestions are there to save you time, but you may use other tools if you are more comfortable with them.
 
-## Rendu 
+## Deliverable
 
-Procédure expliquant la mise en oeuvre de la solution. Un simple fichier texte est suffisant.
+A procedure explaining how you implemented the solution. A simple text file is sufficient.
 
-## Exercice
+## Exercise
 
-Déployer un service web sous Docker dans le cloud et récupérer les métriques Node.js sur Grafana 
+Deploy a web service using Docker in the cloud and collect Node.js metrics in Grafana.
 
-- Récupérer le projet https://github.com/NeoSpheres/devops-assessment
-- Réparer le Dockerfile qui comporte une erreur de build
-    
+- Clone the project: https://github.com/NeoSpheres/devops-assessment
+- Fix the Dockerfile which has a build error:
+
     ```bash
-    docker build -t myapp .                                                                                                                                              13:06:52
+    docker build -t myapp .
     Sending build context to Docker daemon  4.096kB
     Step 1/9 : FROM node:lts-alpine3.16 as deps
      ---> 6e983a17c040
@@ -49,33 +49,34 @@ Déployer un service web sous Docker dans le cloud et récupérer les métriques
     Step 7/9 : COPY --from=deps /app/node_modules ./node_modules
     COPY failed: stat app/node_modules: file does not exist
     ```
-    
-- Déployer le conteneur sur une instance EC2
-    
+
+- Deploy the container on an EC2 instance:
+
     ![aws.png](aws.png)
-    
-- Récupérer les métriques NodeJS dans Grafana en suivant le guide d’intégration sur votre instance Grafana (https://INSTANCE-NAME.grafana.net/a/grafana-easystart-app/nodejs).
-    - Le conteneur expose “/metrics” (Etape 2)
-        
+
+- Collect NodeJS metrics in Grafana by following the integration guide on your Grafana instance:  
+  [https://INSTANCE-NAME.grafana.net/a/grafana-easystart-app/nodejs](https://INSTANCE-NAME.grafana.net/a/grafana-easystart-app/nodejs)
+
+    - The container should expose `/metrics` (Step 2)
+
         ![grafana-integration.png](grafana-integration.png)
-        
 
 ## Bonus
 
-- Au push sur Github, automatiser le build du conteneur et sa publication sur un registry :
-    - Suggestions :
-        - Github Actions
-        - Registry Github (ghcr.io) ou Docker Hub
+- On GitHub push, automate the container build and push to a registry:
+    - Suggestions:
+        - GitHub Actions
+        - GitHub Registry (`ghcr.io`) or Docker Hub
 
-- Automatiser le déploiement du conteneur
-    - Suggestions : 
+- Automate container deployment:
+    - Suggestions:
         - Ansible
-        - Github Actions
+        - GitHub Actions
         - Terraform
 
-- Exposer le service sur le port 443 et sécuriser le trafic avec HTTPS.
-    - Suggestions: 
-        - Nginx ou Haproxy
-        - Dans le conteneur docker ou sur l'instance EC2
-        - Openssl (certificat auto-signé)
-        - Let's Encrypt
+- Expose the service on port 443 and secure traffic with HTTPS:
+    - Suggestions:
+        - Nginx or HAProxy
+        - In the Docker container or on the EC2 instance
+        - OpenSSL (self-signed certificate)
+        - Let’s Encrypt
